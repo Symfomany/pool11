@@ -2,13 +2,28 @@
 
   class Commentaire {
 
-    protected $id;
+    protected $id = 1;
     protected $content;
     protected $note;
     protected $date;
     protected $visible;
     protected $humain;
     protected $produit;
+
+
+    /**
+    * Fonction qui se déclenche lors de la construction d'un objet
+    */
+    public function __construct($content, $note,
+     Humain $humain,Produit $produit) {
+        $this->content = $content;
+        $this->note = $note;
+        $this->humain = $humain;
+        $this->produit = $produit;
+        $this->visible = false;
+        $this->date = date('d/m/Y');
+
+    }
 
 
   /**
@@ -132,7 +147,5 @@
     }
 
 
-    public function __construct() {
-    }
 
   }

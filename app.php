@@ -17,6 +17,7 @@
 // inclusion de ma Classe Humain (fichier)
 include "src/App/Humain.php";
 include "src/App/Produit.php";
+include "src/App/Commentaire.php";
 
 // création d'un objet (ou instance de classe)
 $alexandre = new Humain();
@@ -156,7 +157,7 @@ $produitTwo->ajoutAccessoire(['Etuis', 'Bandouliere']);
 $alexandre->modifierProduit($produit, 10, 750);
 $alexandre->gestionPanier($produit);
 $alexandre->gestionPanier($produitTwo);
-
+/*
 $alexandre->modifyQuantity($produitTwo, 20);
 echo $alexandre->showPanier();
 
@@ -168,7 +169,7 @@ echo $alexandre->showPanier();
 
 $alexandre->gestionPanier($produit);
 echo $alexandre->showPanier();
-
+*/
 
 
 /*
@@ -198,6 +199,14 @@ echo '<p>Total : ' . $alexandre->calculPanier() . '€</p>';
 
 */
 
+$commentaireOne = new Commentaire("super!!", 17, $alexandre, $produit);
+$commentaireTwo = new Commentaire("bof :(", 11, $francois, $produit);
+$commentaireThree = new Commentaire("naz...",6, $alexandre, $produitTwo);
+
+echo "<pre>";
+var_dump($commentaireOne);
+echo "</pre>";
+
 
 /*
 * Constructeur: initialisation des objets
@@ -207,6 +216,10 @@ echo '<p>Total : ' . $alexandre->calculPanier() . '€</p>';
 * Exception (meme en JS)
 * 
 */
+
+
+
+
 
 
 
