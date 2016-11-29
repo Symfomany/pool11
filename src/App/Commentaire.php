@@ -2,7 +2,7 @@
 
   class Commentaire {
 
-    protected $id = 1;
+    protected static $id = 1;
     protected $content;
     protected $note;
     protected $date;
@@ -11,44 +11,33 @@
     protected $produit;
 
 
+
     /**
     * Fonction qui se déclenche lors de la construction d'un objet
     */
-    public function __construct($content, $note,
-     Humain $humain,Produit $produit) {
+    public function __construct($content,
+     Humain $humain,Produit $produit,  $note = 3) {
+        // on incrémenta l'attribut static
+        // appartenant à la classe
+        self::$id++;
+
         $this->content = $content;
-        $this->note = $note;
+        $this->note =  $note;
         $this->humain = $humain;
         $this->produit = $produit;
         $this->visible = false;
         $this->date = date('d/m/Y');
 
     }
-
-
-  /**
-     * Get the value of Id
-     *
-     * @return mixed
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
-
     /**
-     * Set the value of Id
-     *
-     * @param mixed id
-     *
-     * @return self
-     */
-    public function setId($id)
-    {
-        $this->id = $id;
-
-        return $this;
+    * Methode qui retourne l'attribut statique'
+    */
+    public static function getId(){
+        return self::$id;
     }
+
+
+  
 
     /**
      * Get the value of Content

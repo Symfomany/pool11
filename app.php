@@ -199,13 +199,36 @@ echo '<p>Total : ' . $alexandre->calculPanier() . '€</p>';
 
 */
 
-$commentaireOne = new Commentaire("super!!", 17, $alexandre, $produit);
-$commentaireTwo = new Commentaire("bof :(", 11, $francois, $produit);
-$commentaireThree = new Commentaire("naz...",6, $alexandre, $produitTwo);
+$commentaireOne = new Commentaire("super!!",  $alexandre, $produit, 17);
+$commentaireTwo = new Commentaire("bof :(",  $francois, $produit, 10);
+$commentaireThree = new Commentaire("naz...", $alexandre, $produitTwo);
 
 echo "<pre>";
-var_dump($commentaireOne);
+var_dump($commentaireOne,
+        $commentaireTwo,
+        $commentaireThree);
 echo "</pre>";
+
+echo Commentaire::getId();
+
+
+/*
+$commentaireOne->setContent('Mouaih...');
+$commentaireTwo = clone $commentaireOne;
+$commentaireTwo->setContent('Nul!!!');
+
+echo "<p>".$commentaireOne->getContent()."</p>";
+
+// 
+$a = 5;
+$b = $a;
+$b = 7; 
+
+echo "<p>".$a."</p>";
+*/
+
+
+
 
 
 /*
