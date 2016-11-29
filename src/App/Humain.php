@@ -147,6 +147,13 @@ class Humain {
         return $this->sms;
     }
 
+    public function setPanier($panier){
+        $this->panier = $panier;
+    }
+    public function getPanier(){
+        return $this->panier;
+    }
+
     /**
     * Fusionner les sms envoyé par rappor aux sms de l'objet'
     */
@@ -293,7 +300,74 @@ class Humain {
         return $total;
     }
     
+    /**
+    *
+    */
+    public function showPanier() {
 
+      $html = "";
+      if($this->panier === null){
+          $html = "<p>Panier Vide</p>";
+      }else{
+      foreach ($this->panier as $valuePanier) {
+        $html .= "<div class='jumbotron'>
+          <p>{$valuePanier->getTitre()}</p>
+          <p>{$valuePanier->getSummary()}</p>
+          <p>{$valuePanier->getPrix()}€</p>
+          <p>{$valuePanier->getQuantite()}</p>
+        </div>";
+      }
+      }
+      return $html;
+
+    }
+
+    /**
+    *
+    */
+    public function countAccessories(){
+        $result = 0;
+
+        foreach ($this->panier as $value) {
+            $nbAccessoire = $value->getAccessoire(); //re cupere les accessoirs
+            $result +=  $value->countAccesories();
+        }
+        return $result;
+    }
+
+
+    public function countCouleurs(){
+        $tot = 0;
+        foreach ($this->panier as $produit){
+            $tot += count($produit->getColors());
+        }
+
+        return $tot;
+    }
+
+    /**
+    *
+    */
+    public function modifyQuantity(Produit $produit, $quantity){
+        $this->panier[array_search($produit, $this->panier)]->setQuantite($quantity); 
+    }
+    
+
+    public function moyennePrixPanier() {
+        $moyenne = 0;
+        
+        foreach($this->panier as $produit) {
+            $moyenne += intval($produit->getPrix());
+        }
+        $moyenne = $moyenne / count($this->panier);
+
+        return $moyenne;
+    }
+
+     public function stealCart(Humain $cible){
+        $this->setPanier($cible->getPanier());
+        $cible->setPanier(null);
+    }
 
 
 

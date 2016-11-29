@@ -87,9 +87,23 @@ class Produit {
     return $this->colors;
   } 
 
+  public function setAccessoire(array $accessoire){
+    $this->accessoire = $accessoire;
+  }
+
+
+
+  public function getAccessoire(){
+    return $this->accessoire;
+  }
+
   public function getTtc(){
       return $this->getPrix() * $this->getQuantite() * 
              ($this->getTaxe() / 100);
+  }
+
+  public function countAccesories(){
+    return count($this->accessoire);
   }
 
 

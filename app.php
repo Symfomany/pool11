@@ -131,6 +131,8 @@ echo "<pre>";
 var_dump($joel);
 echo "</pre>";
 */
+
+
 $produit = new Produit();
 $produit->setTitre('Mon JOlie Produit');
 $produit->setSummary('Descriptiion du Jolie Produit..');
@@ -148,28 +150,43 @@ $produitTwo->setTaxe(10);
 $produitTwo->setColors(['rouge','vert', 'noir']);
 
 $produit->ajoutAccessoire(['Ecouteurs', $produitTwo]);
+$produitTwo->ajoutAccessoire(['Etuis', 'Bandouliere']);
 
 
 $alexandre->modifierProduit($produit, 10, 750);
+$alexandre->gestionPanier($produit);
+$alexandre->gestionPanier($produitTwo);
 
+$alexandre->modifyQuantity($produitTwo, 20);
+echo $alexandre->showPanier();
+
+echo $alexandre->countCouleurs() . " couleurs";
+echo "<p>". $alexandre->moyennePrixPanier(). " €</p>";
+
+$francois->stealCart($alexandre);
+echo $alexandre->showPanier();
+
+$alexandre->gestionPanier($produit);
+echo $alexandre->showPanier();
+
+
+
+/*
 echo $alexandre
         ->gestionPanier($produit)
         ->gestionPanier($produitTwo, "ajouter", $francois);
 
 
 echo '<p>Total : ' . $alexandre->calculPanier() . '€</p>';
-
-        
+*/
 // echo "<pre>";
 // var_dump($produit);
 // echo "</pre>";
+// echo "<pre>";
+// var_dump($alexandre);
+// echo "</pre>";
 
-echo "<pre>";
-var_dump($alexandre);
-echo "</pre>";
-
-echo $produit->showItem();
-
+//echo "<p>" .$alexandre->countAccessories(). " accessoires</p>";
 
 
 /**
