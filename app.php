@@ -198,11 +198,78 @@ echo '<p>Total : ' . $alexandre->calculPanier() . '€</p>';
 * clonage...
 
 */
+try{
+    $commentaireOne = new Commentaire("super!!",  $alexandre, $produit, 17);
+    $commentaireTwo = new Commentaire("bof :(",  $francois, $produit, -5);
+    $commentaireThree = new Commentaire("naz...", $alexandre, $produitTwo, 5, true);
+}
+catch(Exception $e){
+    echo "<p>".$e->getMessage()."</p>";
+    $commentaireTwo = new Commentaire("bof :(",  $francois, $produit, 5);
+}
+// finally{
+// }
 
-$commentaireOne = new Commentaire("super!!",  $alexandre, $produit, 17);
+
+
+
+
+
+
+$commentaireOne->setContent('sqkjdhqs huidsqh');
+$commentaireOne->setContent('sqkjdhqs huidsqh');
+$commentaireOne->setContent('sqkjdhqs huidsqh');
+
+echo "<pre>";
+var_dump($commentaireOne,$commentaireTwo, $commentaireThree);
+echo "</pre>";
+
+
+// echo "<p>".$commentaireOne->getComptContent()." fois</p>";
+
+// $commentaireOne->getCreatedByAlex();
+
+// var_dump(Commentaire::getCreatedByAlex());
+
+
+
+// $commentaireExtra = new Commentaire("super!!",  $alexandre, $produit, 17);
+// $commentaireExtraTwo = new Commentaire("super!!",  $alexandre, $produit, 17);
+
+// $commentaireExtraTwo = clone $commentaireExtra;
+
+
+
+// var_dump(
+//     $commentaireExtra === $commentaireExtraTwo
+// );
+
+
+
+
+/*
+echo "<pre>";
+var_dump(Commentaire::getTrust());
+echo "</pre>";
+
 $commentaireTwo = new Commentaire("bof :(",  $francois, $produit, 10);
-$commentaireThree = new Commentaire("naz...", $alexandre, $produitTwo);
+echo "<pre>";
+var_dump(Commentaire::getTrust());
+echo "</pre>";
 
+$commentaireThree = new Commentaire("naz...", $alexandre, $produitTwo,5, true);
+
+echo "<pre>";
+var_dump(Commentaire::getTrust());
+echo "</pre>";
+*/
+
+
+// echo "<pre>";
+// var_dump(Commentaire::getCommentaireTab());
+// echo "</pre>";
+
+/*
 echo "<pre>";
 var_dump($commentaireOne,
         $commentaireTwo,
@@ -210,6 +277,12 @@ var_dump($commentaireOne,
 echo "</pre>";
 
 echo Commentaire::getId();
+
+
+echo Commentaire::compareTwoObject($commentaireOne);
+
+*/
+
 
 
 /*

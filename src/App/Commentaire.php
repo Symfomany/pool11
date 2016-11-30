@@ -9,26 +9,88 @@
     protected $visible;
     protected $humain;
     protected $produit;
-
-
+    protected static $trust = false;
+    protected static $commentaireTab = [];
+    protected $comptContent = 0;
+    protected static $createdByAlex = false;
 
     /**
     * Fonction qui se déclenche lors de la construction d'un objet
     */
     public function __construct($content,
-     Humain $humain,Produit $produit,  $note = 3) {
+     Humain $humain,Produit $produit,  $note = 3, $visible = false) {
         // on incrémenta l'attribut static
         // appartenant à la classe
         self::$id++;
+       
+       
+        if ($note<0 || $note>20) {
+            throw new Exception('La note doit être comprise entre 0 et 20');
+        }
+
+        if($visible == true){
+            self::$trust = true; 
+        }
 
         $this->content = $content;
         $this->note =  $note;
         $this->humain = $humain;
         $this->produit = $produit;
-        $this->visible = false;
+       
+        $this->trust = $trust;
         $this->date = date('d/m/Y');
 
+         if($this->note > 10){
+            self::$commentaireTab[] = $this;
+         }
+
+         if($humain->getPrenom() === "Alexandre"){
+            self::$createdByAlex = true;
+         }
+
+
+
+
     }
+
+    public static function getCreatedByAlex(){
+        return self::$createdByAlex;
+    }
+
+    public static function getTrust(){
+        return self::$trust;
+    }
+
+    public function getComptContent(){
+        return $this->comptContent;
+    }
+
+
+    public static function getCommentaireTab(){
+        return self::$commentaireTab;
+    }
+
+
+
+
+     
+     /**
+     *
+     */
+     public static function discount(){
+         $discount = 0; //nb de commentaire(note) > 10
+         foreach (self::$commentaireTab as $commentaire) {
+             if($commentaire->getNote() > 10){
+                 $discount++;
+             }
+         }
+
+         return $discount;
+     }
+
+
+
+
     /**
     * Methode qui retourne l'attribut statique'
     */
@@ -36,6 +98,22 @@
         return self::$id;
     }
 
+
+
+    public static function compareTwoObject(
+        Commentaire $commentOne,
+        Commentaire $commentTwo){
+            
+            if($commentOne->getNote() > $commentTwo->getNote()){
+                return $commentOne;
+            }else{
+                return $commentTwo;
+            }
+
+           /* return ($commentOne->getNote() > $commentTwo->getNote()) ?
+                   $commentOne : $commentTwo;
+                   */
+    } 
 
   
 
@@ -58,10 +136,14 @@
      */
     public function setContent($content)
     {
+
         $this->content = $content;
+        $this->comptContent++;
 
         return $this;
     }
+
+    
 
     /**
      * Get the value of Date
