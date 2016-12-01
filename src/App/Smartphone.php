@@ -11,6 +11,8 @@ class Smartphone extends Produit{
 
     protected $resolution = ['1900', '1600'];
 
+    protected $compteurAccessoire = 0;
+
 
 
     public function setCapacite($capacite){
@@ -51,6 +53,16 @@ class Smartphone extends Produit{
             <p>{$this->poid}g </p>
         </div>
         ";
+    }
+
+     public function ajoutAccessoire(array $newAccessoire){
+        
+        if(count($this->accessoire) < 5){
+            parent::ajoutAccessoire($newAccessoire);
+            $this->compteurAccessoire++;
+        }else{
+            throw new Exception("Il y a trop d'accessoires");
+        }
     }
 
 

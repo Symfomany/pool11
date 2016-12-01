@@ -28,6 +28,14 @@ $iPhone->setPrix(699); //parent
 $iPhone->setQuantite(100);
 $iPhone->setTaxe(20);
 
+try{
+    $iPhone->ajoutAccessoire(['Ecouteurs', 'Etuis']);
+    $iPhone->ajoutAccessoire(['Protection', 'Chargeur', 'Adaptateur']);
+    $iPhone->ajoutAccessoire(['Protection', 'Chargeur', 'Adaptateur']);
+}catch(Exception $e){
+    echo $e->getMessage();
+    $iPhone->setAccessoire(['Ecouteurs', 'Etuis']); //plus d'accessoire'
+}
 
 // méthode parente
 echo "<p>".$iPhone->getTtc()."€</p>";
