@@ -17,12 +17,51 @@
 // inclusion de ma Classe Humain (fichier)
 include "src/App/Humain.php";
 include "src/App/Produit.php";
+include "src/App/Smartphone.php";
 include "src/App/Commentaire.php";
+
+
+$iPhone = new Smartphone();
+$iPhone->setTitre('Iphone 7');
+$iPhone->setSummary("Ce n'est pas un téléphone, c'est un iPhone.");
+$iPhone->setPrix(699); //parent
+$iPhone->setQuantite(100);
+$iPhone->setTaxe(20);
+
+
+// méthode parente
+echo "<p>".$iPhone->getTtc()."€</p>";
+
+
+
+
+$iPhone->setPoid(100); //enfant
+$iPhone->setCapacite("32Go"); //enfant
+$iPhone->setResolution([2800,1500]);
+
+echo $iPhone->showItem();
 
 // création d'un objet (ou instance de classe)
 $alexandre = new Humain();
 $alexandre->setNom('Black');
 $alexandre->setPrenom('Alexandre');
+
+echo "<p>".$iPhone->vendre($alexandre)."</p>";
+
+
+
+
+
+
+
+echo "<pre>";
+var_dump($iPhone);
+echo "</pre>";
+
+
+
+
+
 
 $francois = new Humain();
 $francois->setNom('Simitchiev');
