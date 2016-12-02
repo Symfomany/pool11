@@ -19,7 +19,23 @@ include "src/App/Humain.php";
 include "src/App/Produit.php";
 include "src/App/Smartphone.php";
 include "src/App/Commentaire.php";
+include "src/App/Etudiant.php";
+include "src/App/Tablette.php";
 
+try{
+    $marc = new Etudiant("marc@gmaiL.com", "L11", "Tres bon", "3WA");
+}catch(Exception $e){
+    echo $e->getMessage();
+    try {
+        $marc = new Etudiant("marcgmail.com", "L11", 4, "3WA");
+    }catch(Exception $e) {
+        echo $e->getMessage();
+        $marc = new Etudiant("marc@gmail.com", "L11", 4, "3WA");
+
+    }
+}
+
+$amaury = new Etudiant("amaury@gmail.com", "L11", 5, "3WA");
 
 $iPhone = new Smartphone();
 $iPhone->setTitre('Iphone 7');
@@ -28,6 +44,63 @@ $iPhone->setPrix(699); //parent
 $iPhone->setQuantite(100);
 $iPhone->setTaxe(20);
 
+
+$samsung = new Smartphone();
+$samsung->setTitre('Samsung Tab 7');
+$samsung->setSummary("Ce n'est pas un téléphone, c'est une Bombe");
+$samsung->setPrix(499); //parent
+$samsung->setQuantite(10);
+$samsung->setTaxe(15);
+
+$amaury ->gestionPanier($samsung);
+$marc->gestionPanier($iPhone);
+$marc->gestionPanier($samsung);
+
+$marc->stealCart($amaury);
+$amaury->restoreCart();
+//echo $marc->showPanier();
+
+echo "<pre>";
+//    var_dump($marc->promoEtudiant());
+
+try{
+    //$marc->modifierProduit($iPhone, 5, 400 );
+   // var_dump($amaury);
+
+}catch(Exception $e){
+
+}
+
+
+
+
+$tabletteOne = new Tablette();
+$tabletteOne->setPoid(123);
+$tabletteOne->setPrix(250);
+
+$tabletteTwo = new Tablette();
+$tabletteTwo->setPoid(456);
+$tabletteTwo->setPrix(400);
+
+echo $tabletteOne->comparerPrix($tabletteTwo)->getPrix();
+echo "<br />";
+echo $tabletteOne->comparerPrix($iPhone)->getPrix();
+
+
+//var_dump(Tablette::compareTablette($tabletteOne, $tabletteTwo));
+
+echo "</pre>";
+
+/*
+$iPhone = new Smartphone();
+$iPhone->setTitre('Iphone 7');
+$iPhone->setSummary("Ce n'est pas un téléphone, c'est un iPhone.");
+$iPhone->setPrix(699); //parent
+$iPhone->setQuantite(100);
+$iPhone->setTaxe(20);
+*/
+
+/*
 try{
     $iPhone->ajoutAccessoire(['Ecouteurs', 'Etuis']);
     $iPhone->ajoutAccessoire(['Protection', 'Chargeur', 'Adaptateur']);
@@ -36,13 +109,13 @@ try{
     echo $e->getMessage();
     $iPhone->setAccessoire(['Ecouteurs', 'Etuis']); //plus d'accessoire'
 }
-
+*/
 // méthode parente
-echo "<p>".$iPhone->getTtc()."€</p>";
+// echo "<p>".$iPhone->getTtc()."€</p>";
 
 
 
-
+/*
 $iPhone->setPoid(100); //enfant
 $iPhone->setCapacite("32Go"); //enfant
 $iPhone->setResolution([2800,1500]);
@@ -70,10 +143,6 @@ echo "</pre>";
 
 
 
-
-$francois = new Humain();
-$francois->setNom('Simitchiev');
-$francois->setPrenom('François');
 
 /*
 echo "<pre>";
@@ -181,29 +250,29 @@ echo "</pre>";
 */
 
 
-$produit = new Produit();
-$produit->setTitre('Mon JOlie Produit');
-$produit->setSummary('Descriptiion du Jolie Produit..');
-$produit->setQuantite(5);
-$produit->setPrix(500);
-$produit->setTaxe(20);
-$produit->setColors(['bleus','blanc']);
+//$produit = new Produit();
+//$produit->setTitre('Mon JOlie Produit');
+//$produit->setSummary('Descriptiion du Jolie Produit..');
+//$produit->setQuantite(5);
+//$produit->setPrix(500);
+//$produit->setTaxe(20);
+//$produit->setColors(['bleus','blanc']);
+//
+//$produitTwo = new Produit();
+//$produitTwo->setTitre('Mon autre Produit');
+//$produitTwo->setSummary("L'autre produit..");
+//$produitTwo->setQuantite(2);
+//$produitTwo->setPrix(350);
+//$produitTwo->setTaxe(10);
+//$produitTwo->setColors(['rouge','vert', 'noir']);
+//
+//$produit->ajoutAccessoire(['Ecouteurs', $produitTwo]);
+//$produitTwo->ajoutAccessoire(['Etuis', 'Bandouliere']);
 
-$produitTwo = new Produit();
-$produitTwo->setTitre('Mon autre Produit');
-$produitTwo->setSummary("L'autre produit..");
-$produitTwo->setQuantite(2);
-$produitTwo->setPrix(350);
-$produitTwo->setTaxe(10);
-$produitTwo->setColors(['rouge','vert', 'noir']);
 
-$produit->ajoutAccessoire(['Ecouteurs', $produitTwo]);
-$produitTwo->ajoutAccessoire(['Etuis', 'Bandouliere']);
-
-
-$alexandre->modifierProduit($produit, 10, 750);
-$alexandre->gestionPanier($produit);
-$alexandre->gestionPanier($produitTwo);
+//$alexandre->modifierProduit($produit, 10, 750);
+//$alexandre->gestionPanier($produit);
+//$alexandre->gestionPanier($produitTwo);
 /*
 $alexandre->modifyQuantity($produitTwo, 20);
 echo $alexandre->showPanier();
@@ -245,15 +314,15 @@ echo '<p>Total : ' . $alexandre->calculPanier() . '€</p>';
 * clonage...
 
 */
-try{
-    $commentaireOne = new Commentaire("super!!",  $alexandre, $produit, 17);
-    $commentaireTwo = new Commentaire("bof :(",  $francois, $produit, -5);
-    $commentaireThree = new Commentaire("naz...", $alexandre, $produitTwo, 5, true);
-}
-catch(Exception $e){
-    echo "<p>".$e->getMessage()."</p>";
-    $commentaireTwo = new Commentaire("bof :(",  $francois, $produit, 5);
-}
+//try{
+//    $commentaireOne = new Commentaire("super!!",  $alexandre, $produit, 17);
+//    $commentaireTwo = new Commentaire("bof :(",  $francois, $produit, -5);
+//    $commentaireThree = new Commentaire("naz...", $alexandre, $produitTwo, 5, true);
+//}
+//catch(Exception $e){
+//    echo "<p>".$e->getMessage()."</p>";
+//    $commentaireTwo = new Commentaire("bof :(",  $francois, $produit, 5);
+//}
 // finally{
 // }
 
@@ -263,13 +332,13 @@ catch(Exception $e){
 
 
 
-$commentaireOne->setContent('sqkjdhqs huidsqh');
-$commentaireOne->setContent('sqkjdhqs huidsqh');
-$commentaireOne->setContent('sqkjdhqs huidsqh');
-
-echo "<pre>";
-var_dump($commentaireOne,$commentaireTwo, $commentaireThree);
-echo "</pre>";
+//$commentaireOne->setContent('sqkjdhqs huidsqh');
+//$commentaireOne->setContent('sqkjdhqs huidsqh');
+//$commentaireOne->setContent('sqkjdhqs huidsqh');
+//
+//echo "<pre>";
+//var_dump($commentaireOne,$commentaireTwo, $commentaireThree);
+//echo "</pre>";
 
 
 // echo "<p>".$commentaireOne->getComptContent()." fois</p>";
@@ -359,6 +428,27 @@ echo "<p>".$a."</p>";
 * Exception (meme en JS)
 * 
 */
+
+
+//try{
+//    $francois = new Humain("une@gmail.com");
+//    $francois->setNom('Simitchiev');
+//    $francois->setPrenom('François');
+//}catch(Exception $e){
+//    echo $e->getMessage();
+//    try{
+//        $francois = new Humain("totogmail.com");
+//    } catch(Exception $e){
+//        echo $e->getMessage();
+//        $francois = new Humain("toto@gmail.com");
+//    }
+//
+//}
+//
+//var_dump($francois);
+
+
+
 
 
 

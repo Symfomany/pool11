@@ -1,9 +1,13 @@
 <?php
 
+
+
 /**
 * @class Humain
 */
 class Humain {
+
+
 
 
     /**
@@ -54,7 +58,30 @@ class Humain {
     protected $sms = [];
 
 
-  protected $panier = [];
+    protected $panier = [];
+
+    protected $email;
+
+    const EMAILS = ["une@gmail.com", "deux@gmail.com", "trois@gmail.com",
+                    "quatre@gmaiL.com", "cinq@gmail.com"];
+
+    /**
+     * Humain constructor.
+     * @param $email
+     * @throws Exception
+     */
+    public function __construct($email)
+    {
+        if(in_array($email, self::EMAILS)){
+            throw new Exception('L\'email ' . $email . ' fait partie des emails interdits...');
+        }
+        else if(!preg_match("/^([A-Z|a-z|0-9](\.|_|-){0,1})+[A-Z|a-z|0-9]\@([A-Z|a-z|0-9])+((\.){0,1}[A-Z|a-z|0-9]){2}\.[a-z]{2,3}$/", $email)){
+            throw new Exception ("L'email n'est pas de forme valide!");
+        }
+
+        $this->email = $email;
+
+    }
 
 
     /**
@@ -368,6 +395,8 @@ class Humain {
         $this->setPanier($cible->getPanier());
         $cible->setPanier(null);
     }
+
+
 
 
 

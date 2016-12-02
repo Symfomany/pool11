@@ -1,6 +1,9 @@
 <?php
 
-  class Commentaire {
+/**
+ * Class Commentaire
+ */
+class Commentaire {
 
     protected static $id = 1;
     protected $content;
@@ -15,15 +18,24 @@
     protected static $createdByAlex = false;
 
     /**
-    * Fonction qui se déclenche lors de la construction d'un objet
-    */
+     * Commentaire constructor.
+     * @param $content
+     * @param Humain $humain
+     * @param Produit $produit
+     * @param int $note
+     * @param bool $visible
+     * @throws Exception
+     */
+
+
     public function __construct($content,
      Humain $humain,Produit $produit,  $note = 3, $visible = false) {
         // on incrémenta l'attribut static
         // appartenant à la classe
         self::$id++;
        
-       
+        
+        
         if ($note<0 || $note>20) {
             throw new Exception('La note doit être comprise entre 0 et 20');
         }
@@ -99,7 +111,11 @@
     }
 
 
-
+    /**
+     * @param Commentaire $commentOne
+     * @param Commentaire $commentTwo
+     * @return Commentaire
+     */
     public static function compareTwoObject(
         Commentaire $commentOne,
         Commentaire $commentTwo){
